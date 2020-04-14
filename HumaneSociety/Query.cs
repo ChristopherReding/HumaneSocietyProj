@@ -200,15 +200,15 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            int categoryFromDb = db.Categories.Where(c => c.CategoryId == categoryName).FirstOrDefault();
+            int categoryFromDb = db.Categories.Where(c => c.CategoryId == cat).FirstOrDefault();
 
-            if (employeeFromDb == null)
+            if (categoryFromDb == null)
             {
                 throw new NullReferenceException();
             }
             else
             {
-                return employeeFromDb;
+                return categoryFromDb;
             }
         }
         
