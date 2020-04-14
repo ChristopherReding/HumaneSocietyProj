@@ -166,7 +166,40 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+            if(crudOperation == "create")
+            {
+                db.Employees.InsertOnSubmit(employee);
+                db.SubmitChanges();
+            }
+            else if(crudOperation == "delete")
+            {
+                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeNumber == employee.EmployeeNumber && m.LastName == employee.LastName).Single();
+                db.Employees.DeleteOnSubmit(employeeFromDb);
+                db.SubmitChanges();
+            }
+            else if(crudOperation == "read")
+            {
+                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeNumber == employee.EmployeeNumber).Single();//try FirstorDefault
+
+                Console.WriteLine($"name: {employeeFromDb.FirstName} {employeeFromDb.LastName}" +
+                    $"\nemployee number: {employeeFromDb.UserName}" +
+                    $"\nemail: {employeeFromDb.Email}");
+                Console.ReadLine();
+            }
+            else if(crudOperation == "update")
+            {
+                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeNumber == employee.EmployeeNumber && m.LastName == employee.LastName).Single();
+
+                employeeFromDb.FirstName = employee.FirstName;
+                employeeFromDb.LastName = employee.LastName;
+                employeeFromDb.EmployeeNumber = employee.EmployeeNumber;
+                employeeFromDb.Email = employee.Email;
+
+                db.SubmitChanges();
+
+            }
+            
+            
         }
 
         // TODO: Animal CRUD Operations
