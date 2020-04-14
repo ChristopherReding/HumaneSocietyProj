@@ -211,7 +211,16 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            Animal animalFromDb = db.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+
+            if (animalFromDb == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                return animalFromDb;
+            }
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -233,7 +242,7 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            int categoryFromDb = db.Categories.Where(c => c.CategoryId == cat).FirstOrDefault();
+            Category categoryFromDb = db.Categories.Where(c => c.Name == categoryName).FirstOrDefault();
 
             if (categoryFromDb == null)
             {
@@ -241,7 +250,7 @@ namespace HumaneSociety
             }
             else
             {
-                return categoryFromDb;
+                return categoryFromDb.CategoryId;
             }
         }
         
@@ -252,7 +261,16 @@ namespace HumaneSociety
         
         internal static int GetDietPlanId(string dietPlanName)
         {
-            throw new NotImplementedException();
+            DietPlan dietPlanFromDb = db.DietPlans.Where(d => d.Name == dietPlanName).FirstOrDefault();
+
+            if (dietPlanFromDb == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                return dietPlanFromDb.DietPlanId;
+            }
         }
 
         // TODO: Adoption CRUD Operations
