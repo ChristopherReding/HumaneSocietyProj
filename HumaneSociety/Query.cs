@@ -173,19 +173,22 @@ namespace HumaneSociety
             }
             else if(crudOperation == "delete")
             {
-                db.Employees.DeleteOnSubmit(employee);
+                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeNumber == employee.EmployeeNumber && m.LastName == employee.LastName).Single();
+                db.Employees.DeleteOnSubmit(employeeFromDb);
                 db.SubmitChanges();
             }
             else if(crudOperation == "read")
             {
-                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeNumber == employee.EmployeeNumber).Single();//try FirstorDefault
+
                 Console.WriteLine($"name: {employeeFromDb.FirstName} {employeeFromDb.LastName}" +
                     $"\nemployee number: {employeeFromDb.UserName}" +
                     $"\nemail: {employeeFromDb.Email}");
+                Console.ReadLine();
             }
             else if(crudOperation == "update")
             {
-                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                Employee employeeFromDb = db.Employees.Where(m => m.EmployeeNumber == employee.EmployeeNumber && m.LastName == employee.LastName).Single();
 
                 employeeFromDb.FirstName = employee.FirstName;
                 employeeFromDb.LastName = employee.LastName;
