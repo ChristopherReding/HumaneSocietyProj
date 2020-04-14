@@ -172,7 +172,8 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         internal static Animal GetAnimalByID(int id)
@@ -199,7 +200,16 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            throw new NotImplementedException();
+            int categoryFromDb = db.Categories.Where(c => c.CategoryId == categoryName).FirstOrDefault();
+
+            if (employeeFromDb == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                return employeeFromDb;
+            }
         }
         
         internal static Room GetRoom(int animalId)
