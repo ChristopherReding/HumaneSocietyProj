@@ -422,12 +422,26 @@ namespace HumaneSociety
         {
             IQueryable<AnimalShot> shotsFromDB = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId);
 
+
+
             return shotsFromDB;
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+            Shot shotFromDb = db.Shots.Where(m => m.Name == shotName).Single();
+
+            //AnimalShot animalshot = db.AnimalShots.Where(a => /*a.AnimalId == animal.AnimalId &&*/ a.ShotId == shotFromDb.ShotId).Single();
+
+            AnimalShot animalshot = new AnimalShot();
+            DateTime dateOfShot = Convert.ToDateTime(UserInterface.GetStringData("the shot was given", "the date"));
+            animalshot.AnimalId = animal.AnimalId;
+            animalshot.DateReceived = dateOfShot;
+            animalshot.ShotId = shotFromDb.ShotId;
+
+            db.AnimalShots.InsertOnSubmit(animalshot);
+
+            db.SubmitChanges();
         }
     }
 }
