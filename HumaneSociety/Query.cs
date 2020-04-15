@@ -224,13 +224,26 @@ namespace HumaneSociety
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            Animal animalFromDb = db.Animals.Where(a => a.AnimalId == animalId).Single();
+
+            animalFromDb.CategoryId = Convert.ToInt32(updates[1]);
+            animalFromDb.Name = updates[2];
+            animalFromDb.Age = Convert.ToInt32(updates[3]);
+            animalFromDb.Demeanor = updates[4];
+            animalFromDb.KidFriendly = Convert.ToBoolean(updates[5]);
+            animalFromDb.PetFriendly = Convert.ToBoolean(updates[6]);
+            animalFromDb.Weight = Convert.ToInt32(updates[7]);
+            animalFromDb.AnimalId = Convert.ToInt32(updates[8]);
+            
+            db.SubmitChanges();
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            Animal animalFromDb = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
+            db.Animals.DeleteOnSubmit(animalFromDb);
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
@@ -274,7 +287,17 @@ namespace HumaneSociety
         
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+            Room roomFromDb = db.Rooms.Where(r => r.AnimalId == animalId).FirstOrDefault();
+            
+            if (roomFromDb == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                return roomFromDb;
+            }
+
         }
         
         internal static int GetDietPlanId(string dietPlanName)
@@ -294,12 +317,25 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+
+            Adoption adoptionToDB = new Adoption { Animal = animal, Client = client};
+
+            if (animal == null || client == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                db.Adoptions.InsertOnSubmit(adoptionToDB);
+                db.SubmitChanges();
+            }
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            Animal animalFromDB = db.Animals.Where(a => a.AdoptionStatus == "available").ToList;
+
+            return animalFromDB;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
@@ -309,7 +345,18 @@ namespace HumaneSociety
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            throw new NotImplementedException();
+            Adoption adoptionFromDb = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).Single();
+            
+
+            if (adoptionFromDb == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                db.Adoptions.DeleteOnSubmit(adoptionFromDb);
+                db.SubmitChanges();
+            }
         }
 
         // TODO: Shots Stuff
