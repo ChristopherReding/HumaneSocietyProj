@@ -1,0 +1,39 @@
+INSERT INTO Categories VALUES('Fish');
+INSERT INTO Categories VALUES('Birds');
+INSERT INTO Categories VALUES('Reptiles');
+INSERT INTO Categories VALUES('Mammals');
+INSERT INTO Categories VALUES('Invertebrates');
+
+INSERT INTO DietPlans VALUES('Carnivore','Meat',5);
+INSERT INTO DietPlans VALUES('Herbivore','Vegetables',20);
+INSERT INTO DietPlans VALUES('Omnivore','Everything',20);
+INSERT INTO DietPlans VALUES('Heavy Omnivore','Everything',50);
+INSERT INTO DietPlans VALUES('Lite Omnivore','Everything',5);
+
+INSERT INTO Animals VALUES('Cosmo',13,4,'Friendly, likes to cuddle',1,1,'m','available',4,2,NULL);
+INSERT INTO Animals VALUES('Spot',13,4,'Friendly, likes to cuddle',1,1,'f','available',1,2,NULL);
+INSERT INTO Animals VALUES('Harley',130,6,'Likes to play fetch',1,1,'m','available',2,1,NULL);
+INSERT INTO Animals VALUES('Spike',2,7,'Sings Constantly',1,1,'f','available',2,3,NULL);
+INSERT INTO Animals VALUES('Odie',45,13,'Slow, loves to eat',1,1,'m','available',3,4,NULL);
+
+
+INSERT INTO Rooms VALUES(1,null)
+INSERT INTO Rooms VALUES(2,null)
+INSERT INTO Rooms VALUES(3,null)
+INSERT INTO Rooms VALUES(4,null)
+INSERT INTO Rooms VALUES(5,null)
+INSERT INTO Rooms VALUES(6,null)
+INSERT INTO Rooms VALUES(7,null)
+INSERT INTO Rooms VALUES(8,null)
+INSERT INTO Rooms VALUES(9,null)
+INSERT INTO Rooms VALUES(10,null)
+INSERT INTO Employees VALUES('Carole','Baskin','CBaskin','iKilledMyhusb@nd',1,'CoolKitten69@aol.com')
+INSERT INTO Employees VALUES('Joe', 'Exotic','JExotic','thatbitchc@role',2,'TigerKing@yahoo.com')
+INSERT INTO Employees VALUES('Bhagavan', 'Antle','BAntle','noF@tties',3,'BigCatGuru@gmail.com')
+INSERT INTO Employees VALUES('John', 'Finlay','JFinlay','i<3Meth',4,'Methfan69_420@hotmail.com')
+INSERT INTO Employees VALUES('Kelci', 'Saffery','KSaffery','1fT3%s',5,'1ArmLeft@yahoo.com')
+INSERT INTO Clients VALUES('Rick','Kirkham','RKirkham','341ugds',null,'realityTV@gmail.com')
+INSERT INTO Clients VALUES('Joshua', 'Dial','JDial','98gsfd34',null,'didnotaskforthis@sbcglobal.net')
+INSERT INTO Clients VALUES('Jeff', 'Lowe','JLowe','5q4gh5',null,'douchenozzle@yahoo.com')
+INSERT INTO Clients VALUES('James', 'Garretson','JGarretson','43h3t4', null, 'shadesville90@yahoo.com')
+INSERT INTO Clients VALUES('Allen', 'Glover','AGlover','9189ghaEFa', null, 'CutNRun$3k@wi.rr.com')
