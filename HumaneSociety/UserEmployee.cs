@@ -60,7 +60,7 @@ namespace HumaneSociety
 
         private void CheckAdoptions()
         {
-            throw new NotImplementedException();
+            
             Console.Clear();
             List<string> adoptionInfo = new List<string>();
             int counter = 1;
