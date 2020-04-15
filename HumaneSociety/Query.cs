@@ -227,14 +227,14 @@ namespace HumaneSociety
         {
             Animal animalFromDb = db.Animals.Where(a => a.AnimalId == animalId).Single();
 
-            animalFromDb.CategoryId = Convert.ToInt32(updates[2]);
-            animalFromDb.Name = updates[3];
-            animalFromDb.Age = Convert.ToInt32(updates[4]);
-            animalFromDb.Demeanor = updates[5];
-            animalFromDb.KidFriendly = Convert.ToBoolean(updates[6]);
-            animalFromDb.PetFriendly = Convert.ToBoolean(updates[7]);
-            animalFromDb.Weight = Convert.ToInt32(updates[8]);
-            animalFromDb.AnimalId = Convert.ToInt32(updates[9]);
+            animalFromDb.CategoryId = Convert.ToInt32(updates[1]);
+            animalFromDb.Name = updates[2];
+            animalFromDb.Age = Convert.ToInt32(updates[3]);
+            animalFromDb.Demeanor = updates[4];
+            animalFromDb.KidFriendly = Convert.ToBoolean(updates[5]);
+            animalFromDb.PetFriendly = Convert.ToBoolean(updates[6]);
+            animalFromDb.Weight = Convert.ToInt32(updates[7]);
+            animalFromDb.AnimalId = Convert.ToInt32(updates[8]);
             
             db.SubmitChanges();
         }
@@ -315,7 +315,9 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            Animal animalFromDB = db.Animals.Where(a => a.AdoptionStatus == "available").ToList;
+
+            return animalFromDB;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
