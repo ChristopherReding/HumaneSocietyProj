@@ -220,5 +220,16 @@ namespace HumaneSociety
             }
             return searchParameters;
         }
+        public static bool UserResponseToBool(string input)
+        {            
+            if (input == "yes" || input == "y" || input == "true")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
