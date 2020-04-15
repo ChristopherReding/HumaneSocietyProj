@@ -227,6 +227,8 @@ namespace HumaneSociety
         {
             Animal animalFromDb = db.Animals.Where(a => a.AnimalId == animalId).Single();
 
+
+
             animalFromDb.CategoryId = Convert.ToInt32(updates[1]);
             animalFromDb.Name = updates[2];
             animalFromDb.Age = Convert.ToInt32(updates[3]);
@@ -235,7 +237,17 @@ namespace HumaneSociety
             animalFromDb.PetFriendly = Convert.ToBoolean(updates[6]);
             animalFromDb.Weight = Convert.ToInt32(updates[7]);
             animalFromDb.AnimalId = Convert.ToInt32(updates[8]);
-            
+
+
+
+            //Start from the whole db
+            //var animals = db.animals
+            //foreach (updates[int] in updates)//keyvalue pair in updates
+            //{
+            //    //switch case
+            //    animals = animals.where
+            //}
+
             db.SubmitChanges();
         }
 
@@ -354,14 +366,28 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            Animal animalFromDB = db.Animals.Where(a => a.AdoptionStatus == "available").ToList;
 
-            return animalFromDB;
+            IQueryable<Adoption> pendingAdoptionsFromDB = db.Adoptions.Where(a => a.ApprovalStatus == "Pending");
+            
+            return pendingAdoptionsFromDB;
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            if (isAdopted)
+            {
+                db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).Single();
+                adoption.ApprovalStatus = "Adopted";
+                db.Adoptions.InsertOnSubmit(adoption);
+                db.SubmitChanges();
+            }
+            else
+            {
+                db.Adoptions.Where(a => a.AnimalId == adoption.AnimalId).Single();
+                adoption.ApprovalStatus = "Available";
+                db.Adoptions.InsertOnSubmit(adoption);
+                db.SubmitChanges();
+            }
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
