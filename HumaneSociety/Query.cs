@@ -235,7 +235,7 @@ namespace HumaneSociety
             animalFromDb.PetFriendly = Convert.ToBoolean(updates[7]);
             animalFromDb.Weight = Convert.ToInt32(updates[8]);
             animalFromDb.AnimalId = Convert.ToInt32(updates[9]);
-
+            
             db.SubmitChanges();
         }
 
@@ -299,7 +299,18 @@ namespace HumaneSociety
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+
+            Adoption adoptionToDB = new Adoption { Animal = animal, Client = client};
+
+            if (animal == null || client == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                db.Adoptions.InsertOnSubmit(adoptionToDB);
+                db.SubmitChanges();
+            }
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -314,7 +325,18 @@ namespace HumaneSociety
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            throw new NotImplementedException();
+            Adoption adoptionFromDb = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).Single();
+            
+
+            if (adoptionFromDb == null)
+            {
+                throw new NullReferenceException();
+            }
+            else
+            {
+                db.Adoptions.DeleteOnSubmit(adoptionFromDb);
+                db.SubmitChanges();
+            }
         }
 
         // TODO: Shots Stuff
