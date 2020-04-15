@@ -227,11 +227,14 @@ namespace HumaneSociety
         {
             Animal animalFromDb = db.Animals.Where(a => a.AnimalId == animalId).Single();
 
-            animalFromDb.CategoryId = updates["category"];
-            animalFromDb.Demeanor = updates["demeanor"];
-            animalFromDb.Age = updates["age"];
-            animalFromDb.Name = updates["name"];
-            animalFromDb.Weight = updates["weight"];
+            animalFromDb.CategoryId = Convert.ToInt32(updates[2]);
+            animalFromDb.Name = updates[3];
+            animalFromDb.Age = Convert.ToInt32(updates[4]);
+            animalFromDb.Demeanor = updates[5];
+            animalFromDb.KidFriendly = Convert.ToBoolean(updates[6]);
+            animalFromDb.PetFriendly = Convert.ToBoolean(updates[7]);
+            animalFromDb.Weight = Convert.ToInt32(updates[8]);
+            animalFromDb.AnimalId = Convert.ToInt32(updates[9]);
 
             db.SubmitChanges();
         }
